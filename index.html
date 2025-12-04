@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Jackpo - SUPERFUN99</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ef4444;
+      --muted:#94a3b8;
+      --white:#f8fafc;
+    }
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#071027 0%, #0b1725 100%);
+      color:var(--white);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      width:100%;
+      max-width:520px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+    }
+    h1{ margin:0 0 8px 0; font-size:20px; }
+    p.lead{ margin:0 0 18px 0; color:var(--muted); font-size:14px; }
+    .input-row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .link-input{
+      flex:1;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.08);
+      padding:10px 12px;
+      border-radius:8px;
+      color:var(--white);
+      font-size:14px;
+      outline:none;
+    }
+    .link-input[readonly]{ cursor:text; }
+    .btn{
+      background:linear-gradient(180deg,var(--accent), #b91c1c);
+      color:white;
+      border:none;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:14px;
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--white);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .actions{ margin-top:16px; display:flex; gap:10px; }
+    .small{ font-size:13px; color:var(--muted); margin-top:12px; }
+    .copy-note{ color: #cbd5e1; font-size:13px; }
+    a.plainlink{ color:inherit; text-decoration:underline; }
+    footer{ margin-top:18px; font-size:12px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Daftar Jackpo SUPERFUN99</h1>
+    <p class="lead">Kotak di bawah berisi link pendaftaran. Klik tombol "Buka" untuk menuju situs daftar. Di bawahnya ada tombol "Cek Review".</p>
+
+    <!-- Ganti URL_DAFTAR_JACKPO dan URL_CEK_REVIEW dengan link tujuan -->
+    <div class="input-row" style="margin-bottom:8px;">
+      <input id="linkField" class="link-input" type="text" readonly value="https://superfun99www.xyz/register?ref=3chjbig" aria-label="Link daftar jackpo" />
+      <button id="openBtn" class="btn" title="Buka link daftar">DAFTAR JACKPOT</button>
+    </div>
+
+    <div class="actions">
+      <button id="copyBtn" class="btn secondary" title="Salin link">
+        Salin Link
+      </button>
+
+      <a id="reviewLink" class="plainlink" href="https://URL_CEK_REVIEW" target="_blank" rel="noopener noreferrer">
+        <button class="btn" style="background:#0b7a55;">Cek Review</button>
+      </a>
+    </div>
+
+    <div class="small">
+      Atau klik langsung link: 
+      <a id="directAnchor" class="plainlink" href="https://URL_DAFTAR_JACKPO" target="_blank" rel="noopener noreferrer">https://URL_DAFTAR_JACKPO</a>
+    </div>
+
+    <footer>
+      <span class="copy-note">Tip: kamu bisa mengganti URL di dalam kode HTML pada atribut `value` dan `href`.</span>
+    </footer>
+  </main>
+
+  <script>
+    // ===========================
+    // GANTI DI SINI JIKA PERLU
+    // ===========================
+    const DAFTAR_URL = "https://example.com/daftar-jackpo"; // ganti dengan link daftar
+    const REVIEW_URL = "https://example.com/cek-review";    // ganti dengan link review
+    // ===========================
+
+    const linkField = document.getElementById('linkField');
+    const openBtn = document.getElementById('openBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const reviewLink = document.getElementById('reviewLink');
+    const directAnchor = document.getElementById('directAnchor');
+
+    // set initial values from constants (memudahkan penggantian lewat JS)
+    linkField.value = DAFTAR_URL;
+    directAnchor.href = DAFTAR_URL;
+    directAnchor.textContent = DAFTAR_URL;
+    reviewLink.href = REVIEW_URL;
+    reviewLink.querySelector('button').setAttribute('aria-label','Cek Review');
+
+    openBtn.addEventListener('click', () => {
+      // buka di tab baru
+      window.open(linkField.value, '_blank', 'noopener');
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(linkField.value);
+        copyBtn.textContent = 'Tersalin ✓';
+        setTimeout(()=> copyBtn.textContent = 'Salin Link', 1400);
+      } catch (err) {
+        // fallback: select text supaya user bisa salin manual
+        linkField.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Tersalin ✓';
+        setTimeout(()=> copyBtn.textContent = 'Salin Link', 1400);
+      }
+    });
+
+    // buka link ketika user menekan Enter pada kotak (jika ingin)
+    linkField.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter') openBtn.click();
+    });
+  </script>
+</body>
+</html>
