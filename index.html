@@ -49,9 +49,9 @@ body {
   box-shadow: 0 0 8px rgba(255,215,0,0.5);
 }
 
-/* Kotak Hubungi Admin */
-.box-admin {
-  margin: 35px auto;
+/* Box umum */
+.box-admin, .box-rtp {
+  margin: 20px auto;
   width: 90%;
   max-width: 420px;
   background: rgba(255, 215, 0, 0.1);
@@ -64,9 +64,10 @@ body {
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
   cursor: pointer;
   transition: 0.2s;
+  text-transform: uppercase;
 }
 
-.box-admin:active {
+.box-admin:active, .box-rtp:active {
   transform: scale(0.97);
 }
 </style>
@@ -77,13 +78,17 @@ body {
 
 <div class="container">
   <button class="btn" onclick="window.location.href='https://superfun99www.xyz/register?ref=3chjbig'">DAFTAR</button>
-
   <button class="btn" onclick="window.location.href='https://superfun99-glitch.github.io/REVIEW/'">CEK REVIEW</button>
 </div>
 
 <!-- KOTAK HUBUNGI ADMIN -->
-<div class="box-admin" onclick="window.location.href='https://wa.me/6285167300904?text=Halo%20ADMIN,%20BANTU%20DAFTAR%20JACKPOT'">
+<div class="box-admin" onclick="window.location.href='https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20butuh%20bantuan'">
   HUBUNGI ADMIN KHUSUS
+</div>
+
+<!-- KOTAK CEK RTP TERBARU -->
+<div class="box-rtp" onclick="window.location.href='http://ramalaninfo2.site/'">
+  CEK RTP TERBARU DI SINI
 </div>
 
 </body>
